@@ -1,0 +1,23 @@
+{
+  "name": "openvpn-multi-client-dashboard",
+  "version": "1.0.0",
+  "description": "OpenVPN CloudConnexa canlı çoklu bağlantı dashboard uygulaması",
+  "private": true,
+  "scripts": {
+    "dev": "netlify dev",
+    "deploy": "netlify deploy",
+    "deploy:prod": "netlify deploy --prod"
+  },
+  "keywords": [
+    "openvpn",
+    "cloudconnexa",
+    "dashboard",
+    "vpn",
+    "netlify"
+  ],
+  "author": "Yasin Uzunyol",
+  "license": "MIT",
+  "devDependencies": {
+    "netlify-cli": "latest"
+  }
+}

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CloudConnexa Canlı Ağ İzleme Paneli | NOC</title>
+  <meta name="description" content="OpenVPN CloudConnexa altyapısı canlı ağ izleme paneli." />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div id="login-overlay" class="login-overlay">
+    <form id="login-form" class="login-card" aria-labelledby="login-title">
+      <h2 id="login-title">Sisteme Giriş</h2>
+      <p>NOC Paneline erişmek için yetkilendirme gereklidir.</p>
+      
+      <div class="input-group">
+        <label for="username">Kullanıcı Adı</label>
+        <input type="text" id="username" required autocomplete="username" />
+      </div>
+      
+      <div class="input-group">
+        <label for="password">Şifre</label>
+        <input type="password" id="password" required autocomplete="current-password" />
+      </div>
+      
+      <p id="login-error" class="login-error" aria-live="polite"></p>
+      
+      <button type="submit" class="btn-primary">Giriş Yap</button>
+    </form>
+  </div>
+
+  <div id="dashboard-content" style="display: none;">
+    <header class="site-header">
+      <nav class="navbar" aria-label="Ana menü">
+        <div>
+          <h1>CloudConnexa Ağ İzleme Paneli</h1>
+          <p>Kurumsal VPN Altyapısı Canlı Takip Sistemi</p>
+        </div>
+        <div class="nav-links">
+          <a href="#mimari">Altyapı Mimarisi</a>
+          <a href="#cihazlar">Bağlı İstemciler</a>
+          <a href="#teknik-detaylar">Sistem Özellikleri</a>
+          <a href="#wcag">Erişilebilirlik</a>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero" aria-labelledby="proje-basligi">
+        <div class="hero-content">
+          <p class="eyebrow">Ağ Güvenliği ve Erişim Yönetimi</p>
+          <h2 id="proje-basligi">Eşzamanlı Çoklu Bağlantı ve İstemci Yönetimi</h2>
+          <p>
+            Bu izleme paneli, kurumsal uzaktan çalışma altyapısının güvenliğini sağlamak amacıyla oluşturulmuştur. Cihazların bağlantı durumlarını ve IP adreslerini gerçek zamanlı olarak konsolide eder.
+          </p>
+        </div>
+      </section>
+
+      <section class="cards" aria-label="Canlı sistem özeti">
+        <article class="card">
+          <h3>Aktif Kullanıcı</h3>
+          <p class="metric" id="online-users">Yükleniyor...</p>
+          <p class="card-description">Ağ üzerinde aktif oturum açmış kullanıcı sayısı</p>
+        </article>
+        <article class="card">
+          <h3>Aktif Bağlantı / Cihaz</h3>
+          <p class="metric success" id="online-devices">Yükleniyor...</p>
+          <p class="card-description">Eşzamanlı bağlı durumdaki kurumsal istemciler</p>
+        </article>
+        <article class="card">
+          <h3>VPN Altyapısı</h3>
+          <p class="metric small">CloudConnexa</p>
+          <p class="card-description">Yönetilen güvenli bulut VPN ağı</p>
+        </article>
+      </section>
+
+      <section class="section" id="mimari" aria-labelledby="mimari-baslik">
+        <h2 id="mimari-baslik">Sistem ve Veri Akış Mimarisi</h2>
+        <p>Uç noktadaki cihazlar OpenVPN aracılığıyla ağa entegre olur. Geliştirilen izleme aracı, API üzerinden telemetri verilerini alır.</p>
+        <div class="architecture" role="img" aria-label="Mimari şema">
+          <div class="node">Endpoint-Laptop <span>Windows OS</span></div>
+          <div class="line" aria-hidden="true"></div>
+          <div class="cloud">CloudConnexa <span>Secure Network</span></div>
+          <div class="line" aria-hidden="true"></div>
+          <div class="node">Endpoint-Mobile <span>Android OS</span></div>
+        </div>
+      </section>
+
+      <section class="section" id="cihazlar" aria-labelledby="cihazlar-baslik">
+        <div class="section-header">
+          <div>
+            <h2 id="cihazlar-baslik">Canlı İstemci Matrisi</h2>
+          </div>
+          <span class="live-indicator" aria-label="Canlı veri göstergesi">● Canlı Veri Akışı</span>
+        </div>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">İstemci Tanımı</th>
+                <th scope="col">İşletim Sistemi</th>
+                <th scope="col">Bağlantı Durumu</th>
+                <th scope="col">Ağ Detayları</th>
+              </tr>
+            </thead>
+            <tbody id="device-table-body">
+              <tr>
+                <td colspan="4">Canlı veri akışı senkronize ediliyor...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="section" id="teknik-detaylar" aria-labelledby="teknik-baslik">
+        <h2 id="teknik-baslik">Sistem Özellikleri ve Yetkinlikler</h2>
+        <ul class="check-list">
+          <li>Merkezi bulut tabanlı ağ topolojisi entegrasyonu.</li>
+          <li>Çoklu platform üzerinden eşzamanlı erişim desteği.</li>
+          <li>OAuth 2.0 protokolü ve Bearer Token doğrulama mimarisi.</li>
+          <li>Sunucusuz (Serverless) mikroservis mimarisi.</li>
+          <li>30 saniyelik dinamik veri yenileme mekanizması.</li>
+        </ul>
+      </section>
+
+      <section class="section" id="wcag" aria-labelledby="wcag-baslik">
+        <h2 id="wcag-baslik">Erişilebilirlik ve Standartlara Uyum</h2>
+        <ul class="check-list">
+          <li>W3C standartlarına uygun semantik HTML5 mimarisi.</li>
+          <li>Ekran okuyucular için optimize edilmiş ARIA etiketleri.</li>
+          <li>Klavye (Tab) gezinimi için net ':focus-visible' durumları.</li>
+          <li>Ölçeklenebilir (rem) tipografi ve AAA renk kontrast oranları.</li>
+        </ul>
+      </section>
+    </main>
+
+    <footer>
+      <p>Ağ Operasyonları Merkezi (NOC)</p>
+      <p id="last-updated">Telemetri senkronizasyonu bekleniyor...</p>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
