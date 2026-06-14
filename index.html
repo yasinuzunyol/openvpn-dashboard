@@ -7,26 +7,26 @@
   <meta name="description" content="OpenVPN CloudConnexa altyapısı canlı ağ izleme paneli." />
   <link rel="stylesheet" href="style.css" />
 </head>
-<body>
+<body class="light-theme">
 
   <div id="login-overlay" class="login-overlay">
     <form id="login-form" class="login-card" aria-labelledby="login-title">
-      <h2 id="login-title">Sisteme Giriş</h2>
-      <p>NOC Paneline erişmek için yetkilendirme gereklidir.</p>
+      <h2 id="login-title" data-i18n="loginTitle">Sisteme Giriş</h2>
+      <p data-i18n="loginDesc">NOC Paneline erişmek için yetkilendirme gereklidir.</p>
       
       <div class="input-group">
-        <label for="username">Kullanıcı Adı</label>
+        <label for="username" data-i18n="username">Kullanıcı Adı</label>
         <input type="text" id="username" required autocomplete="username" />
       </div>
       
       <div class="input-group">
-        <label for="password">Şifre</label>
+        <label for="password" data-i18n="password">Şifre</label>
         <input type="password" id="password" required autocomplete="current-password" />
       </div>
       
       <p id="login-error" class="login-error" aria-live="polite"></p>
       
-      <button type="submit" class="btn-primary">Giriş Yap</button>
+      <button type="submit" class="btn-primary" data-i18n="loginBtn">Giriş Yap</button>
     </form>
   </div>
 
@@ -34,111 +34,168 @@
     <header class="site-header">
       <nav class="navbar" aria-label="Ana menü">
         <div>
-          <h1>CloudConnexa Ağ İzleme Paneli</h1>
-          <p>Kurumsal VPN Altyapısı Canlı Takip Sistemi</p>
+          <h1 data-i18n="headerTitle">CloudConnexa Ağ İzleme Paneli</h1>
+          <p data-i18n="headerSub">Kurumsal VPN Altyapısı Canlı Takip Sistemi</p>
         </div>
-        <div class="nav-links">
-          <a href="#mimari">Altyapı Mimarisi</a>
-          <a href="#cihazlar">Bağlı İstemciler</a>
-          <a href="#teknik-detaylar">Sistem Özellikleri</a>
-          <a href="#wcag">Erişilebilirlik</a>
+        
+        <div class="nav-controls">
+          <button id="reports-nav-btn" class="btn-secondary" style="border-color: #f59e0b; color: #f59e0b;" data-i18n="btnReports">⚠️ Karantina</button>
+          
+          <select id="language-select" class="lang-switch" aria-label="Dil Seçimi">
+            <option value="tr">TR - Türkçe</option>
+            <option value="en">EN - English</option>
+            <option value="ar">AR - العربية</option>
+            <option value="fr">FR - Français</option>
+          </select>
+          <button id="theme-toggle" class="theme-btn" aria-label="Tema Değiştir">🌙</button>
+          
+          <div class="user-profile">
+            <button id="profile-btn" class="profile-btn" aria-haspopup="true" aria-expanded="false">
+              <img src="https://ui-avatars.com/api/?name=Admin&background=1d4ed8&color=fff&bold=true" alt="Admin Avatar" class="avatar">
+              <span class="user-name">Admin</span>
+            </button>
+            <div id="profile-dropdown" class="profile-dropdown">
+              <div class="dropdown-header">
+                <strong data-i18n="profName">Yönetici Paneli</strong>
+                <span data-i18n="profRole">Sistem Yöneticisi</span>
+              </div>
+              <ul class="dropdown-menu">
+                <li><button id="settings-btn" class="dropdown-item" data-i18n="btnSettings">⚙️ Profil Ayarları</button></li>
+                <li><button id="logout-btn" class="dropdown-item text-danger" data-i18n="btnLogout">🚪 Çıkış Yap</button></li>
+              </ul>
+            </div>
+          </div>
         </div>
       </nav>
     </header>
 
     <main>
-      <section class="hero" aria-labelledby="proje-basligi">
-        <div class="hero-content">
-          <p class="eyebrow">Ağ Güvenliği ve Erişim Yönetimi</p>
-          <h2 id="proje-basligi">Eşzamanlı Çoklu Bağlantı ve İstemci Yönetimi</h2>
-          <p>
-            Bu izleme paneli, kurumsal uzaktan çalışma altyapısının güvenliğini sağlamak amacıyla oluşturulmuştur. Cihazların bağlantı durumlarını ve IP adreslerini gerçek zamanlı olarak konsolide eder.
-          </p>
-        </div>
-      </section>
-
       <section class="cards" aria-label="Canlı sistem özeti">
         <article class="card">
-          <h3>Aktif Kullanıcı</h3>
-          <p class="metric" id="online-users">Yükleniyor...</p>
-          <p class="card-description">Ağ üzerinde aktif oturum açmış kullanıcı sayısı</p>
+          <h3 data-i18n="card1Title">Aktif Kullanıcı</h3>
+          <p class="metric" id="online-users">0</p>
         </article>
         <article class="card">
-          <h3>Aktif Bağlantı / Cihaz</h3>
-          <p class="metric success" id="online-devices">Yükleniyor...</p>
-          <p class="card-description">Eşzamanlı bağlı durumdaki kurumsal istemciler</p>
+          <h3 data-i18n="card2Title">Aktif Bağlantı / Cihaz</h3>
+          <p class="metric success" id="online-devices">0 / 0</p>
         </article>
         <article class="card">
-          <h3>VPN Altyapısı</h3>
+          <h3 data-i18n="card3Title">VPN Altyapısı</h3>
           <p class="metric small">CloudConnexa</p>
-          <p class="card-description">Yönetilen güvenli bulut VPN ağı</p>
         </article>
-      </section>
-
-      <section class="section" id="mimari" aria-labelledby="mimari-baslik">
-        <h2 id="mimari-baslik">Sistem ve Veri Akış Mimarisi</h2>
-        <p>Uç noktadaki cihazlar OpenVPN aracılığıyla ağa entegre olur. Geliştirilen izleme aracı, API üzerinden telemetri verilerini alır.</p>
-        <div class="architecture" role="img" aria-label="Mimari şema">
-          <div class="node">Endpoint-Laptop <span>Windows OS</span></div>
-          <div class="line" aria-hidden="true"></div>
-          <div class="cloud">CloudConnexa <span>Secure Network</span></div>
-          <div class="line" aria-hidden="true"></div>
-          <div class="node">Endpoint-Mobile <span>Android OS</span></div>
-        </div>
       </section>
 
       <section class="section" id="cihazlar" aria-labelledby="cihazlar-baslik">
         <div class="section-header">
           <div>
-            <h2 id="cihazlar-baslik">Canlı İstemci Matrisi</h2>
+            <h2 id="cihazlar-baslik" data-i18n="tableTitle">Canlı İstemci Matrisi</h2>
           </div>
-          <span class="live-indicator" aria-label="Canlı veri göstergesi">● Canlı Veri Akışı</span>
+          
+          <div class="table-actions">
+            <span class="live-indicator" data-i18n="liveIndicator">● Canlı Veri Akışı</span>
+            <button id="export-csv" class="btn-secondary" data-i18n="exportBtn">⬇ Rapor İndir (CSV)</button>
+          </div>
         </div>
+        
         <div class="table-wrapper">
-          <table>
+          <table id="clients-table">
             <thead>
               <tr>
-                <th scope="col">İstemci Tanımı</th>
-                <th scope="col">İşletim Sistemi</th>
-                <th scope="col">Bağlantı Durumu</th>
-                <th scope="col">Ağ Detayları</th>
+                <th scope="col" data-i18n="thDevice">İSTEMCİ TANIMI</th>
+                <th scope="col" data-i18n="thOs">İŞLETİM SİSTEMİ</th>
+                <th scope="col" data-i18n="thStatus">BAĞLANTI DURUMU</th>
+                <th scope="col" data-i18n="thNetwork">AĞ DETAYLARI</th>
+                <th scope="col" data-i18n="thAction">İŞLEM</th>
               </tr>
             </thead>
             <tbody id="device-table-body">
               <tr>
-                <td colspan="4">Canlı veri akışı senkronize ediliyor...</td>
+                <td colspan="5" data-i18n="loading">Canlı veri akışı senkronize ediliyor...</td>
               </tr>
             </tbody>
           </table>
         </div>
       </section>
-
-      <section class="section" id="teknik-detaylar" aria-labelledby="teknik-baslik">
-        <h2 id="teknik-baslik">Sistem Özellikleri ve Yetkinlikler</h2>
-        <ul class="check-list">
-          <li>Merkezi bulut tabanlı ağ topolojisi entegrasyonu.</li>
-          <li>Çoklu platform üzerinden eşzamanlı erişim desteği.</li>
-          <li>OAuth 2.0 protokolü ve Bearer Token doğrulama mimarisi.</li>
-          <li>Sunucusuz (Serverless) mikroservis mimarisi.</li>
-          <li>30 saniyelik dinamik veri yenileme mekanizması.</li>
-        </ul>
-      </section>
-
-      <section class="section" id="wcag" aria-labelledby="wcag-baslik">
-        <h2 id="wcag-baslik">Erişilebilirlik ve Standartlara Uyum</h2>
-        <ul class="check-list">
-          <li>W3C standartlarına uygun semantik HTML5 mimarisi.</li>
-          <li>Ekran okuyucular için optimize edilmiş ARIA etiketleri.</li>
-          <li>Klavye (Tab) gezinimi için net ':focus-visible' durumları.</li>
-          <li>Ölçeklenebilir (rem) tipografi ve AAA renk kontrast oranları.</li>
-        </ul>
-      </section>
     </main>
 
     <footer>
-      <p>Ağ Operasyonları Merkezi (NOC)</p>
+      <p data-i18n="footerText">Ağ Operasyonları Merkezi (NOC)</p>
       <p id="last-updated">Telemetri senkronizasyonu bekleniyor...</p>
     </footer>
+  </div>
+
+  <div id="profile-content" style="display: none;">
+    <header class="site-header">
+      <nav class="navbar" style="justify-content: flex-start; gap: 1.5rem;">
+        <button id="back-to-dash" class="btn-secondary" data-i18n="btnBack">⬅ Geri Dön</button>
+        <div>
+          <h1 data-i18n="profPageTitle">Profil ve Güvenlik Ayarları</h1>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <section class="section" style="max-width: 600px; margin: 3rem auto;">
+        <form id="profile-edit-form">
+          <div class="input-group">
+            <label for="edit-email" data-i18n="emailLabel">E-posta Adresi</label>
+            <input type="email" id="edit-email" required />
+          </div>
+          <hr style="margin: 2rem 0; border: none; border-top: 1px solid var(--border-color);" />
+          
+          <h3 style="margin-bottom: 1rem; font-size: 1.1rem;" data-i18n="passwordTitle">Şifre Değiştir</h3>
+          
+          <div class="input-group">
+            <label for="edit-old-pass" data-i18n="oldPassLabel">Mevcut Şifre (Zorunlu)</label>
+            <input type="password" id="edit-old-pass" required />
+          </div>
+          
+          <div class="input-group">
+            <label for="edit-new-pass" data-i18n="newPassLabel">Yeni Şifre</label>
+            <input type="password" id="edit-new-pass" minlength="6" />
+          </div>
+
+          <p id="profile-msg" class="login-error" style="color: var(--brand-color);"></p>
+          
+          <button type="submit" class="btn-primary" data-i18n="btnSave">Değişiklikleri Kaydet</button>
+        </form>
+      </section>
+    </main>
+  </div>
+
+  <div id="reports-content" style="display: none;">
+    <header class="site-header">
+      <nav class="navbar" style="justify-content: flex-start; gap: 1.5rem;">
+        <button id="back-to-dash-from-reports" class="btn-secondary" data-i18n="btnBack">⬅ Geri Dön</button>
+        <div>
+          <h1 data-i18n="reportsPageTitle">Karantinadaki Cihazlar</h1>
+          <p data-i18n="reportsPageSub" style="font-size: 0.875rem; color: var(--text-muted);">Güvenlik ekiplerince incelenen şüpheli bağlantılar</p>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <section class="section">
+        <div class="table-wrapper">
+          <table id="reported-table">
+            <thead>
+              <tr>
+                <th scope="col" data-i18n="thDevice">İSTEMCİ TANIMI</th>
+                <th scope="col" data-i18n="thOs">İŞLETİM SİSTEMİ</th>
+                <th scope="col" data-i18n="thStatus">BAĞLANTI DURUMU</th>
+                <th scope="col" data-i18n="thNetwork">AĞ DETAYLARI</th>
+                <th scope="col" data-i18n="thAction">İŞLEM</th>
+              </tr>
+            </thead>
+            <tbody id="reported-table-body">
+              <tr>
+                <td colspan="5" data-i18n="emptyReports">Karantinada cihaz bulunmamaktadır.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
   </div>
 
   <script src="script.js"></script>
